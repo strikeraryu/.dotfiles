@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Path to the Zsh history file
+HISTORY_FILE="/Users/striker/.zsh_history"
+
+# Function to get the second last command from the history file
+get_last_command() {
+    # Check if the history file exists
+    if [[ ! -f "$HISTORY_FILE" ]]; then
+        echo "History file not found!"
+        exit 1
+    fi
+
+    # Check if the history file has at least two lines
+    line_count=$(wc -l < "$HISTORY_FILE")
+    if [[ "$line_count" -lt 2 ]]; then
+        echo "Not enough commands in history file."
+        exit 1
+    fi
+
+    # Get the second last line from the history file
+    second_last_line=$(tail -n 2 "$HISTORY_FILE" | head -n 1)
+
+    # Extract the actual command 
+    # Zsh history typically has lines like ": timestamp:0;command"
+    second_last_command=$(echo "$second_last_line" | cut -d ';' -f 2-)
+
+    # Check if we got a valid command
+    if [[ -z "$second_last_command" ]]; then
+        echo "No command found in history file."
+        exit 1
+    fi
+
+    echo "$second_last_command"
+}
+
+# Retrieve and print the second last command
+last_command=$(get_last_command)
+echo "last executed command: $last_command"
+watch -n 1 "$last_command"

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+timestamp=$(date +"%d%m%Y%H%M")
+
+cd $MIND_PALACE
+git pull
+git add .
+git commit -m "sync: $timestamp"
+git push
+cd -

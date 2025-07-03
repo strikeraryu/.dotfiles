@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd ~/Downloads || exit
+
+file=$(ls -t | fzf)
+
+if [ -n "$file" ]; then
+    read -rp "Enter the new file name ($file): " new_name
+
+    if [ -z "$new_name" ]; then
+        new_name="$file"
+    fi
+
+    cp "$file" "$OLDPWD/$new_name"
+fi

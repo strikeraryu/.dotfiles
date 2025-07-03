@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Function to get the current timestamp in IST 12-hour format
+get_timestamp() {
+    TZ='Asia/Kolkata' date '+%I:%M %p'
+}
+
+# Function to add or update the Day Log section
+update_day_log() {
+    local file="$1"
+    local action="$2"
+    local timestamp=$(get_timestamp)
+    local log_entry="- [$timestamp] $action"
+
+    # Check if the file exists
+    if [ ! -f "$file" ]; then
+        echo "File does not exist: $file"
+        exit 1
+    fi
+
+    # Check if ## Day Log exists, if not add it
+    if ! grep -q "^## Day Log" "$file"; then
+        echo -e "\n## Day Log" >> "$file"
+    fi
+
+    # Simply append the new log entry to the file
+    echo "$log_entry" >> "$file"
+}
+
+# Main script
+if [ $# -eq 0 ]; then
+    echo "Usage: logme <action>"
+    exit 1
+fi
+
+today=$(date +"%d-%m-%Y")
+month=$(date +"%m")
+file="$MIND_PALACE/1-periodic-notes/daily-notes/$month/$today.md"
+action="$*"
+
+update_day_log "$file" "$action"
+echo "Action logged successfully."

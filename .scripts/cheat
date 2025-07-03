@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#shortcut for cheatsheet
+input="$1"
+curl "cheat.sh/$input"
+

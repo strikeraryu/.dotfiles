@@ -1,0 +1,43 @@
+#!/bin/bash
+
+today=$(date +"%d-%m-%Y")
+month=$(date +"%m")
+tomorrow=$(date -v+1d +"%d-%m-%Y")
+yesterday=$(date -v-1d +"%d-%m-%Y")
+file="$MIND_PALACE/1-periodic-notes/daily-notes/$month/$today.md"
+
+cd "$MIND_PALACE" || exit
+
+new_note() {
+	mkdir "$MIND_PALACE/1-periodic-notes/daily-notes/$month"
+	touch "$file"
+
+	# Format the file with the daily template
+	cat <<EOF >"$file"
+# $today
+
+[[$yesterday]] - [[$tomorrow]]
+
+## Tasks
+
+- [x] day logged
+- [ ] Used pomo/Be productive
+- [ ] Learn Something new
+- [ ] Post on insta
+
+## Log
+
+## Todo's for Tomorrow
+EOF
+
+}
+
+# If the daily note does not exist, create a new one.
+# this uses the test command with the -f flag.
+if [ ! -f "$file" ]; then
+	echo "File does not exist, creating new daily note."
+	new_note
+fi
+
+# Open the daily note at the bottom of the file in insert mode and run NoNeckPain to make it center
+nvim '+ normal Gzz' "$file" -c :NoNeckPain

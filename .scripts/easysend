@@ -1,0 +1,5 @@
+#!/bin/bash
+
+file=$(ls | fzf)
+echo $file
+cp -f "$file" ~/easy_send/

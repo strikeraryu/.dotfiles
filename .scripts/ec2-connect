@@ -1,0 +1,4 @@
+#!/bin/bash
+
+AWS_PROFILE=${2:-prod-dev}
+aws --profile $AWS_PROFILE ssm start-session --target $1

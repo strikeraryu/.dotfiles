@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Default filename
+default_filename="s3-links"
+filename=${1:-$default_filename}
+
+# Check for '-t' and '-p' flags
+use_timestamp=false
+
+while getopts "t" opt; do
+  case $opt in
+    t)
+      use_timestamp=true
+      ;;
+    *)
+      ;;
+  esac
+done
+
+shift $((OPTIND -1))
+filename=${1:-$default_filename}
+
+s3_paths=($(cat $filename))
+
+# Total number of files
+total_files=${#s3_paths[@]}
+completed_files=0
+skipped_files=0
+
+# Function to update progress bar
+update_progress() {
+  progress=$(( ($completed_files * 100) / $total_files ))
+  echo -ne "Downloading: ["
+  for ((i=0; i<$progress; i+=2)); do echo -ne "#"; done
+  for ((i=$progress; i<100; i+=2)); do echo -ne " "; done
+  echo -ne "] $progress% ($completed_files/$total_files) [skipped_files: $skipped_files/$completed_files]\r"
+}
+
+# Function to download a single file
+download_file() {
+  local s3_path=$1
+  original_file_name=$(echo $s3_path | awk -F '/' '{print $9}')
+  if [ "$use_timestamp" = true ]; then
+    file_name=$(date +%Y%m%d%H%M%S)
+  else
+    file_name=$original_file_name
+  fi
+
+  if [ -f "$file_name" ]; then
+    skipped_files=$((skipped_files + 1))
+  else
+    aws --profile prod-dev s3 cp "$s3_path" "$file_name" > /dev/null 2>&1
+  fi
+  completed_files=$((completed_files + 1))
+  update_progress
+  sleep 1 # To ensure unique timestamps
+}
+
+# Download files sequentially
+echo "Starting downloads..."
+for s3_path in "${s3_paths[@]}"; do
+  download_file "$s3_path"
+done
+
+echo -ne "\nDownload complete.\n"
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mv "$1" "$MIND_PALACE/00-zettelkasten/"

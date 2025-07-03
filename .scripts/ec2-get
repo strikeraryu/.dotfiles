@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#!/bin/bash
+# aws --profile prod-dev ec2 describe-instances --filters "Name=tag:Name,Values=$1" --query 'Reservations[*].Instances[*].[InstanceId]' --output text
+aws --profile prod-dev ec2 describe-instances \
+    --filters "Name=tag:Name,Values=*$1*" \
+    --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value | [0], InstanceId]' \
+    --output text | grep $1

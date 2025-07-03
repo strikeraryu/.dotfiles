@@ -1,0 +1,35 @@
+# Theme import — adjust path or use Ghostty's theme system if available
+theme = "ayu-dark"
+
+# Shell program
+initial-command = /opt/homebrew/bin/tmux new-session -A -D -s ghostty
+quit-after-last-window-closed = true
+
+# Environment
+term = xterm-256color
+
+# Font settings
+font-family = MesloLGS NF
+font-size = 13
+
+# Window behavior
+window-decoration = none
+macos-option-as-alt = true
+background-opacity = 0.9
+background-blur-radius = 20
+
+# fullscreen = true
+maximize = true
+
+# Padding
+window-padding-x = 0
+window-padding-y = 0
+
+# Quick Terminal
+quick-terminal-animation-duration = 0
+keybind = global:alt+s=toggle_quick_terminal
+
+# Keybindings
+# keybind = alt+right="\u001BF"
+# keybind = alt+left="\u001BB"
+# keybind = ctrl+enter="\u001B[13;5u"
