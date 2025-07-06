@@ -1,0 +1,47 @@
+-- Competetive programming
+vim.api.nvim_create_user_command("Executecode", function()
+  local filetype = vim.bo.filetype
+  local filename = vim.fn.expand("%:p")
+  local input_file = "./input"
+  local output_file = "./output"
+
+  if filetype == "python" then
+    -- Run Python code, redirecting both stdout and stderr to the output file
+    local run_cmd = "python3 " .. filename .. " < " .. input_file .. " > " .. output_file .. " 2>&1"
+    vim.fn.system(run_cmd)
+    if vim.v.shell_error == 0 then
+      print("Python code executed successfully! Output saved in 'output'.")
+    else
+      print("Python code execution failed! Check 'output' for details.")
+    end
+  elseif filetype == "cpp" then
+    -- Compile C++ code, overwriting the output file for errors
+    local compiled_file = "./a.out"
+    local compile_cmd = "g++ -std=c++11 " .. filename .. " -o " .. compiled_file .. " 2> " .. output_file
+    vim.fn.system(compile_cmd)
+    if vim.v.shell_error == 0 then
+      -- Run the compiled binary, overwriting the output file
+      local run_cmd = compiled_file .. " < " .. input_file .. " > " .. output_file .. " 2>&1"
+      vim.fn.system(run_cmd)
+      if vim.v.shell_error == 0 then
+        print("C++ code executed successfully! Output saved in 'output'.")
+      else
+        print("C++ code execution failed! Check 'output' for details.")
+      end
+      -- Clean up the compiled file
+      vim.fn.system("rm " .. compiled_file)
+    else
+      print("C++ code compilation failed! Check 'output' for details.")
+    end
+  else
+    print("Unsupported file type! Only Python and C++ are supported.")
+  end
+end, {})
+
+vim.keymap.set("n", "<leader>ec", "<cmd>Executecode<cr>", { desc = "[E]xecute [C]ode" })
+vim.keymap.set("n", "<leader>es", "<cmd>Easysend<cr>", { desc = "[E]asysend [S]end" })
+
+vim.keymap.set({"n"}, "<leader>LR", "<cmd>Leet run<cr>", { desc = "[L]eetCode [R]un" })
+vim.keymap.set({"n"}, "<leader>LT", "<cmd>Leet test<cr>", { desc = "[L]eetCode [T]est" })
+vim.keymap.set({"n"}, "<leader>LC", "<cmd>Leet console<cr>", { desc = "[L]eetCode [C]onsole" })
+vim.keymap.set({"n"}, "<leader>LL", "<cmd>Leet lang<cr>", { desc = "[L]eetCode [C]onsole" })

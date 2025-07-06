@@ -114,5 +114,5 @@ function cget() {
   echo "Copied clipboard entry #$index to system clipboard"
 }
 
-alias cshare='curl -X POST "$CLIPBOARD_SERVER_HOST/share" -H "X-Clipboard-Password: $CLIPBOARD_SERVER_PASSWORD" -d "data=$(pbpaste)"'
+alias cshare='pbpaste | curl -X POST -H "X-Clipboard-Password: $CLIPBOARD_SERVER_PASSWORD" -H "Content-Type: text/plain" --data-binary @- "$CLIPBOARD_SERVER_HOST/share"'
 alias cpreview='curl -H "X-Clipboard-Password: $CLIPBOARD_SERVER_PASSWORD" "$CLIPBOARD_SERVER_HOST/preview"'

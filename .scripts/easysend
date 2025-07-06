@@ -1,5 +1,4 @@
 #!/bin/bash
 
-file=$(ls | fzf)
-echo $file
-cp -f "$file" ~/easy_send/
+file=${1:-$(ls | fzf)}
+[ -n "$file" ] && cp -f "$file" ~/easy-send/
