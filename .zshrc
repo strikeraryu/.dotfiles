@@ -13,8 +13,8 @@ export WORK_STATION="$HOME/work-station"
 export TLDR_AUTO_UPDATE_DISABLED=true
 export EDITOR="vi"
 
-source $HOME/.secrets
-
+# Load secrets
+[ -f "$HOME/.secret_exports" ] && source "$HOME/.secret_exports"
 
 # Path Configuration
 export PATH=$HOME/bin:$PATH
