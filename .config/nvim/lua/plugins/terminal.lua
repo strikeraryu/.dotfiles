@@ -6,7 +6,7 @@ return {
     local Terminal = require("toggleterm.terminal").Terminal
 
     toggleterm.setup({
-      size = 15,
+      size = 10,
       open_mapping = nil, -- remove to avoid conflict with custom mappings
       hide_numbers = true,
       shade_filetypes = {},
@@ -33,7 +33,7 @@ return {
     -- Custom terminals
     local terminals = {
       lazygit = Terminal:new({
-        cmd = "lazygit",
+        cmd = "tmux new-session -s lazygit  -c " .. vim.fn.getcwd() .. " lazygit",
         hidden = false,
         direction = "float",
         float_opts = float_opts,
@@ -73,6 +73,12 @@ return {
         '<Cmd>execute v:count . "ToggleTerm direction=horizontal"<CR>',
         vim.tbl_extend("force", opts, { desc = "Toggle Horizontal Terminal" }))
     end
+
+    -- To fix the flow terminal issue 
+    vim.api.nvim_create_autocmd("TermOpen", {
+      pattern = "*",
+      command = "setlocal syntax=off",
+    })
 
     -- Custom terminal toggles
     vim.keymap.set("n", "<leader>lg", function() toggle_term("lazygit") end, opts)

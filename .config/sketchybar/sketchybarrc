@@ -1,0 +1,44 @@
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
+
+# Load global styles, colors and icons
+source "$CONFIG_DIR/globalstyles.sh"
+
+POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
+POPUP_OFF="sketchybar --set \$NAME popup.drawing=off"
+
+# Unload the macOS on screen indicator overlay for volume change
+launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
+
+sketchybar --bar "${bar[@]}" --default "${item_defaults[@]}"
+
+# Left
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/yabai.sh"
+source "$ITEM_DIR/spaces.sh"
+
+# Notch
+# source "$ITEM_DIR/countdown.sh"
+
+# Right
+source "$ITEM_DIR/datetime.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/diskmonitor.sh"
+source "$ITEM_DIR/pomo.sh"
+source "$ITEM_DIR/music.sh"
+source "$ITEM_DIR/front_app.sh"
+
+sketchybar --bar topmost=window
+sketchybar --bar color=0x90000000
+sketchybar --bar position=top
+
+# Brackets '/space\..*/'
+sketchybar \
+        --add bracket left_side yabai '/space\..*/' \
+        --set left_side "${bracket_defaults[@]}" \
+\
+        --add bracket status_icons diskmonitor battery date clock \
+        --set status_icons "${bracket_defaults[@]}"
+
+sketchybar --hotload on
+sketchybar --update

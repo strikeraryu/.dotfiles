@@ -116,3 +116,8 @@ function cget() {
 
 alias cshare='pbpaste | curl -X POST -H "X-Clipboard-Password: $CLIPBOARD_SERVER_PASSWORD" -H "Content-Type: text/plain" --data-binary @- "$CLIPBOARD_SERVER_HOST/share"'
 alias cpreview='curl -H "X-Clipboard-Password: $CLIPBOARD_SERVER_PASSWORD" "$CLIPBOARD_SERVER_HOST/preview"'
+
+# Run all custom .zshrc.* in the root directory
+for file in $HOME/.zshrc.*; do
+  source $file
+done
