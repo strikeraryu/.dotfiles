@@ -1,13 +1,21 @@
 #!/bin/bash
 
-
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/mind-palace ~/work-station/bench/work ~/work-station/bench/personal ~/work-station/dump/work/scaler ~/work-station/dump/ ~/work-station/dump/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+    # Get list of current tmux sessions
+    current_sessions=$(tmux list-sessions -F "#S" 2>/dev/null)
+    # Find directories and prepend current sessions to the list
+    selected=$( (echo "$current_sessions"; echo "------------"; find ~/mind-palace ~/work-station/bench/work ~/work-station/bench/personal ~/work-station/dump/ ~/work-station/dump/personal -mindepth 1 -maxdepth 1 -type d) | fzf)
 fi
 
 if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Check if the selected item is a tmux session
+if echo "$current_sessions" | grep -q "^$selected$"; then
+    tmux switch-client -t $selected
     exit 0
 fi
 
@@ -24,3 +32,4 @@ if ! tmux has-session -t=$selected_name 2> /dev/null; then
 fi
 
 tmux switch-client -t $selected_name
+

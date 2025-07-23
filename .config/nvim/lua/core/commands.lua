@@ -8,3 +8,10 @@ vim.api.nvim_create_user_command('Easysend', function()
     print("No file to copy!")
   end
 end, {})
+
+vim.api.nvim_create_user_command('RemoveFromQuickfix', function()
+  local qf = vim.fn.getqflist()
+  local idx = vim.fn.getqflist({ idx = 0 }).idx
+  table.remove(qf, idx)
+  vim.fn.setqflist(qf, 'r')
+end, {})

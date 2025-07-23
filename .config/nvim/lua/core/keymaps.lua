@@ -14,6 +14,7 @@ local mappings = {
   { "n", "]q", ":cn<CR>", { desc = "Next quickfix item" } },
   { "n", "<Leader>qo", ":copen<CR>", { desc = "Open quickfix list" } },
   { "n", "<Leader>qc", ":cclose<CR>", { desc = "Close quickfix list" } },
+  { "n", "<Leader>qd", ":RemoveFromQuickfix<CR>", { desc = "Delete current quickfix item" } },
 
   -- ═══════════════════════════════════════════
   -- Tabs
@@ -42,6 +43,7 @@ local mappings = {
   { "n", "<C-S-Right>", ":vertical resize -3<CR>", { desc = "Resize split right" } },
   { "n", "<C-S-Up>", ":resize +3<CR>", { desc = "Resize split up" } },
   { "n", "<C-S-Down>", ":resize -3<CR>", { desc = "Resize split down" } },
+  { "n", "<leader>|", ":vs<cr>", { desc = "Split vertically" } },
 
   -- ═══════════════════════════════════════════
   -- Text movement
@@ -79,8 +81,8 @@ local mappings = {
   -- ═══════════════════════════════════════════
   -- File & clipboard
   -- ═══════════════════════════════════════════
-  { "n", "<Leader>cp", ':let @+ = expand("%:.")<CR>', { desc = "Copy relative path to clipboard" } },
-  { "n", "<Leader>cf", ':let @+ = expand("%:t")<CR>', { desc = "Copy filename to clipboard" } },
+  { "n", "<Leader>cp", ':let @+ = expand("%:.")<CR>:echo "Relative path copied to clipboard"<CR>', { desc = "Copy relative path to clipboard" } },
+  { "n", "<Leader>cf", ':let @+ = expand("%:t")<CR>:echo "Filename copied to clipboard"<CR>', { desc = "Copy filename to clipboard" } },
   { "n", "<leader>ft", ":set filetype=", { desc = "Set filetype manually" } },
 
   -- ═══════════════════════════════════════════

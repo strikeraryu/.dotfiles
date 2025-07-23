@@ -1,7 +1,45 @@
 return {
   {
-    'christoomey/vim-tmux-navigator',
+    'christoomey/vim-tmux-navigator'
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    -- branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local harpoon = require('harpoon')
+      harpoon.setup({
+        global_settings = {
+          mark_branch = true
+        },
+        menu = {
+          width = 80
+        }
+      })
+
+      vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end)
+      vim.keymap.set("n", "<leader>a", function() require("harpoon.mark").add_file() end)
+      vim.keymap.set("n", "<M-1>", function() require("harpoon.ui").nav_file(1) end)
+      vim.keymap.set("n", "<M-2>", function() require("harpoon.ui").nav_file(2) end)
+      vim.keymap.set("n", "<M-3>", function() require("harpoon.ui").nav_file(3) end)
+      vim.keymap.set("n", "<M-4>", function() require("harpoon.ui").nav_file(4) end)
+      vim.keymap.set("n", "<M-5>", function() require("harpoon.ui").nav_file(5) end)
+      vim.keymap.set("n", "<C-S-P>", function() require("harpoon.ui").nav_prev() end)
+      vim.keymap.set("n", "<C-S-N>", function() require("harpoon.ui").nav_next() end)
+
+
+    end
+  },
+  { 'ap/vim-css-color', },
+  { 'mechatroner/rainbow_csv' },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -37,8 +75,5 @@ return {
         desc = "Search sessions",
       }))
     end,
-  },
-  { 'jbgutierrez/vim-better-comments' },
-  { 'ap/vim-css-color' },
-  { 'mechatroner/rainbow_csv' }
+  }
 }

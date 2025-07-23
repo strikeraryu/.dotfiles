@@ -45,6 +45,15 @@ plugins=(
 )
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
+# ZSH Plugins Config
+bindkey '^ ' autosuggest-accept
+
+# for session keybind
+function session_widget() {
+  "$SCRIPTS/session"
+}
+zle -N session_widget
+bindkey '^s' 'session_widget'
 
 # Loads
 source $ZSH/oh-my-zsh.sh
@@ -53,9 +62,6 @@ intel() {
   arch -x86_64 $@
 }
 
-
-# ZSH Plugins Config
-bindkey '^ ' autosuggest-accept
 
 ## disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
