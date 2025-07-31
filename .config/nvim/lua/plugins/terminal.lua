@@ -69,9 +69,16 @@ return {
 
     -- Horizontal terminal mapping (<C-\>)
     for _, mode in ipairs({ "n", "i", "t" }) do
-      vim.keymap.set(mode, [[<C-\>]],
+      vim.keymap.set(mode, "<leader>Th",
         '<Cmd>execute v:count . "ToggleTerm direction=horizontal"<CR>',
         vim.tbl_extend("force", opts, { desc = "Toggle Horizontal Terminal" }))
+    end
+
+    -- Vertical terminal mapping (<C-\>)
+    for _, mode in ipairs({ "n", "i", "t" }) do
+      vim.keymap.set(mode, "<leader>Tv",
+        '<Cmd>execute v:count . "ToggleTerm direction=vertical size=100"<CR>',
+        vim.tbl_extend("force", opts, { desc = "Toggle Vertical Terminal" }))
     end
 
     -- To fix the flow terminal issue 

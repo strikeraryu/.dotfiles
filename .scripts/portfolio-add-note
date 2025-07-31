@@ -1,0 +1,61 @@
+#!/bin/bash
+
+MIND_PALACE=~/mind-palace
+TARGET_DIR=.
+META_FILE=meta.json
+
+# Select multiple files using fzf
+selected_files=$(find "$MIND_PALACE" -type f | sed "s|$MIND_PALACE/||" | fzf -m)
+[[ -z "$selected_files" ]] && echo "No files selected." && exit 1
+
+# Ensure meta.json exists
+[ ! -f "$META_FILE" ] && echo "{}" > "$META_FILE"
+
+# Loop through selected files
+while IFS= read -r relative_file; do
+  full_path="$MIND_PALACE/$relative_file"
+  filename=$(basename "$relative_file")
+
+  # Extract metadata
+  title=$(grep -m1 '^title:' "$full_path" | cut -d':' -f2- | xargs)
+  date=$(grep -m1 '^date:' "$full_path" | cut -d':' -f2- | xargs)
+
+  # Extract tags
+  raw_tags=$(grep '^Tags:' "$full_path" | sed -E 's/.*Tags:\s*//')
+  tags=()
+  while [[ $raw_tags =~ \[\[([^\]|]+)(\|([^\]]+))?\]\] ]]; do
+    tag="${BASH_REMATCH[3]:-${BASH_REMATCH[1]}}"
+    tags+=("$tag")
+    raw_tags=${raw_tags#*"[[${BASH_REMATCH[1]}${BASH_REMATCH[2]}]]"}
+  done
+  tags_json=$(printf '%s\n' "${tags[@]}" | jq -R . | jq -s .)
+
+  # Clean content (remove frontmatter, Tags line, blank after)
+  cleaned=$(awk '
+    BEGIN { skip = 0; skipping_tags = 0 }
+    /^---$/ { skip++; next }
+    skip < 2 { next }
+    skipping_tags == 1 && NF == 0 { skipping_tags = 0; next }
+    skipping_tags == 1 { skipping_tags = 0 }
+    /^Tags:/ { skipping_tags = 1; next }
+    { print }
+  ' "$full_path")
+
+  # Save cleaned file
+  echo "$cleaned" > "$TARGET_DIR/$filename"
+
+  # Build and merge entry
+  entry=$(jq -n \
+    --arg name "$title" \
+    --arg date "$date" \
+    --argjson tags "$tags_json" \
+    --arg filename "$filename" \
+    '{($filename): {name: $name, date: $date, tags: $tags}}')
+
+  jq ". + $entry" "$META_FILE" > tmp.json && mv tmp.json "$META_FILE"
+
+  echo "Processed: $filename"
+
+done <<< "$selected_files"
+
+echo "✅ All selected files imported and meta.json updated."
