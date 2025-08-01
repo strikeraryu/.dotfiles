@@ -29,24 +29,36 @@ return {
           {
             name = "mind-palace",
             path = "~/mind-palace",
+            overrides = {
+              templates = {
+                folder = "templates"
+              }
+            }
           },
-          name = "hjkl-vault",
-          path = "~/work-station/bench/hjkl/vault",
-        },
-        {
-          name = "no-vault",
-          path = function()
-            return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-          end,
-          overrides = {
-            notes_subdir = vim.NIL,
-            new_notes_location = "current_dir",
-            templates = {
-              folder = vim.NIL,
+          {
+            name = "hjkl-vault",
+            path = "~/work-station/bench/hjkl/vault",
+            overrides = {
+              templates = {
+                folder = "templates"
+              }
+            }
+          },
+          {
+            name = "no-vault",
+            path = function()
+              return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+            end,
+            overrides = {
+              notes_subdir = vim.NIL,
+              new_notes_location = "current_dir",
+              templates = {
+                folder = vim.NIL,
+              },
+              disable_frontmatter = true,
             },
-            disable_frontmatter = true,
           },
-        },
+        }
       })
 
       vim.opt.conceallevel = 2
