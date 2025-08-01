@@ -153,13 +153,13 @@ return { -- LSP Configuration & Plugins
     -- Apply diagnostic configuration for Neovim 0.11+
     vim.diagnostic.config({
       signs = {
-        enabled = true,  -- ensure signs are shown
+        enabled = true, -- ensure signs are shown
         text = sign_icons,
         -- Optionally highlight the whole line or number differently
         -- linehl = false,
         -- numhl = false,
       },
-      virtual_text = false,     -- customize other diagnostic display settings
+      virtual_text = false, -- customize other diagnostic display settings
       underline = true,
       severity_sort = true,
     })
@@ -188,8 +188,8 @@ return { -- LSP Configuration & Plugins
       ['clangd'] = function()
         lspconfig['clangd'].setup({
           capabilities = capabilities,
-          cmd = {"clangd"},
-          filetypes = {"c", "cpp", "objc", "objcpp"},
+          cmd = { "clangd" },
+          filetypes = { "c", "cpp", "objc", "objcpp" },
         })
       end,
       -- ["ruby_lsp"] = function()

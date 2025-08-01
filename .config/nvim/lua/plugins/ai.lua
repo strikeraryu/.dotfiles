@@ -26,7 +26,7 @@ return {
           -- Set to false to disable all key bindings for managing completions.
           map_keys = true,
           -- The key to press when hitting the accept keybinding but no completion is showing.
-          -- Defaults to \t normally or <c-n> when a popup is showing. 
+          -- Defaults to \t normally or <c-n> when a popup is showing.
           accept_fallback = nil,
           -- Key bindings for managing completions in virtual text mode.
           key_bindings = {
@@ -119,7 +119,9 @@ return {
         popup_window = {
           border = { highlight = "FloatBorder", style = "rounded", text = { top = " ChatGPT " } },
           win_options = {
-            wrap = true, linebreak = true, foldcolumn = "1",
+            wrap = true,
+            linebreak = true,
+            foldcolumn = "1",
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           },
           buf_options = { filetype = "markdown" },
@@ -127,7 +129,9 @@ return {
         system_window = {
           border = { highlight = "FloatBorder", style = "rounded", text = { top = " SYSTEM " } },
           win_options = {
-            wrap = true, linebreak = true, foldcolumn = "2",
+            wrap = true,
+            linebreak = true,
+            foldcolumn = "2",
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
           },
         },
@@ -179,8 +183,10 @@ return {
       local opts = { noremap = true, silent = true }
 
       map("n", "<Leader>gc", ":ChatGPT<CR>", vim.tbl_extend("force", opts, { desc = "Open ChatGPT window" }))
-      map("n", "<Leader>gi", ":ChatGPTEditWithInstructions<CR>", vim.tbl_extend("force", opts, { desc = "Edit with ChatGPT instructions" }))
-      map("v", "<Leader>gi", ":ChatGPTEditWithInstructions<CR>", vim.tbl_extend("force", opts, { desc = "Edit selected text with ChatGPT" }))
+      map("n", "<Leader>gi", ":ChatGPTEditWithInstructions<CR>",
+        vim.tbl_extend("force", opts, { desc = "Edit with ChatGPT instructions" }))
+      map("v", "<Leader>gi", ":ChatGPTEditWithInstructions<CR>",
+        vim.tbl_extend("force", opts, { desc = "Edit selected text with ChatGPT" }))
       map("n", "<Leader>ga", ":ChatGPTActAs<CR>", vim.tbl_extend("force", opts, { desc = "ChatGPT: Act as..." }))
     end,
     dependencies = {
@@ -190,4 +196,3 @@ return {
     },
   }
 }
-

@@ -34,8 +34,6 @@ return {
       vim.keymap.set("n", "<M-5>", function() require("harpoon.ui").nav_file(5) end)
       vim.keymap.set("n", "<C-S-P>", function() require("harpoon.ui").nav_prev() end)
       vim.keymap.set("n", "<C-S-N>", function() require("harpoon.ui").nav_next() end)
-
-
     end
   },
   { 'ap/vim-css-color', },

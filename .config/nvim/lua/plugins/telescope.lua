@@ -174,13 +174,13 @@ return {
 
     -- Highlights
     local highlights = {
-      TelescopeMatching       = "cterm=None ctermbg=cyan ctermfg=black gui=bold guifg=#ff0066",
-      TelescopeSelection      = "guifg=white",
-      TelescopeResultsNormal  = "guifg=grey",
-      TelescopeBorder         = "guifg=grey",
-      TelescopePromptTitle    = "guibg=grey guifg=white",
-      TelescopePreviewTitle   = "guibg=grey guifg=white",
-      TelescopePromptCounter  = "guifg=#bab8b8",
+      TelescopeMatching      = "cterm=None ctermbg=cyan ctermfg=black gui=bold guifg=#ff0066",
+      TelescopeSelection     = "guifg=white",
+      TelescopeResultsNormal = "guifg=grey",
+      TelescopeBorder        = "guifg=grey",
+      TelescopePromptTitle   = "guibg=grey guifg=white",
+      TelescopePreviewTitle  = "guibg=grey guifg=white",
+      TelescopePromptCounter = "guifg=#bab8b8",
     }
 
     for group, props in pairs(highlights) do

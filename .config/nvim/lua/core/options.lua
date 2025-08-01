@@ -31,7 +31,7 @@ vim.opt.tabstop = 2
 vim.opt.autoindent = true
 vim.g.pumheight = 15
 vim.opt.laststatus = 3
-vim.opt.winbar='%t %m'
+vim.opt.winbar = '%t %m'
 
 -- File Browser
 vim.g.netrw_banner = 0

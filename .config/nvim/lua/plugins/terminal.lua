@@ -61,27 +61,27 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- Float terminal mapping (<M-\>)
-    for _, mode in ipairs({ "n", "i", "t" }) do
+    for _, mode in ipairs({ "n", "t" }) do
       vim.keymap.set(mode, [[<M-\>]],
         '<Cmd>execute v:count . "ToggleTerm direction=float"<CR>',
         vim.tbl_extend("force", opts, { desc = "Toggle Float Terminal" }))
     end
 
     -- Horizontal terminal mapping (<C-\>)
-    for _, mode in ipairs({ "n", "i", "t" }) do
+    for _, mode in ipairs({ "n" }) do
       vim.keymap.set(mode, "<leader>Th",
         '<Cmd>execute v:count . "ToggleTerm direction=horizontal"<CR>',
         vim.tbl_extend("force", opts, { desc = "Toggle Horizontal Terminal" }))
     end
 
     -- Vertical terminal mapping (<C-\>)
-    for _, mode in ipairs({ "n", "i", "t" }) do
+    for _, mode in ipairs({ "n" }) do
       vim.keymap.set(mode, "<leader>Tv",
         '<Cmd>execute v:count . "ToggleTerm direction=vertical size=100"<CR>',
         vim.tbl_extend("force", opts, { desc = "Toggle Vertical Terminal" }))
     end
 
-    -- To fix the flow terminal issue 
+    -- To fix the flow terminal issue
     vim.api.nvim_create_autocmd("TermOpen", {
       pattern = "*",
       command = "setlocal syntax=off",
