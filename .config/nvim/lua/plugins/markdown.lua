@@ -30,34 +30,23 @@ return {
             name = "mind-palace",
             path = "~/mind-palace",
           },
-          {
-            name = "no-vault",
-            path = function()
-              return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-            end,
-            overrides = {
-              notes_subdir = vim.NIL,
-              new_notes_location = "current_dir",
-              templates = {
-                folder = vim.NIL,
-              },
-              disable_frontmatter = true,
+          name = "hjkl-vault",
+          path = "~/work-station/bench/hjkl/vault",
+        },
+        {
+          name = "no-vault",
+          path = function()
+            return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+          end,
+          overrides = {
+            notes_subdir = vim.NIL,
+            new_notes_location = "current_dir",
+            templates = {
+              folder = vim.NIL,
             },
+            disable_frontmatter = true,
           },
         },
-        templates = {
-          folder = "templates",
-          date_format = "%d-%m-%Y",
-          substitutions = {
-            ['date:YYYYMMDD'] = function()
-              return os.date("%Y%m%d")
-            end,
-            ['time:HHmm'] = function()
-              return os.date("%H%M")
-            end
-          }
-        },
-        disable_frontmatter = true
       })
 
       vim.opt.conceallevel = 2
