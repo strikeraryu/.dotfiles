@@ -151,7 +151,7 @@ return {
         builtin.live_grep({ grep_open_files = true, prompt_title = "Grep Open Files" })
       end, "[S]earch [/] in Open Files")
       nmap("<leader>sn", function()
-        builtin.find_files({ cwd = "~/.env_config/.config/nvim/" })
+        builtin.find_files({ cwd = "~/.dotfiles/.config/nvim/" })
       end, "[S]earch [N]vim config")
       nmap("<leader>mp", function()
         builtin.find_files({ cwd = "~/mind-palace/" })

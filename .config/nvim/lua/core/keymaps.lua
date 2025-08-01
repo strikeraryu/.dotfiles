@@ -99,7 +99,6 @@ local mappings = {
   -- ═══════════════════════════════════════════
   -- Insert mode enhancements
   -- ═══════════════════════════════════════════
-  { "i",          "jk",          "<ESC>",                                                                    { desc = "Escape insert mode" } },
   { "i",          "<M-BS>",      "<C-W>",                                                                    { desc = "Delete word in insert mode" } },
 }
 
