@@ -6,7 +6,7 @@ fi
 # Initial Exports
 export HOMEBREW_NO_AUTO_UPDATE=true
 export ZSH="$HOME/.oh-my-zsh"
-export ENV_HOME="$HOME/.env_config"
+export ENV_HOME="$HOME/.dotfiles"
 export SCRIPTS="$ENV_HOME/.scripts"
 export MIND_PALACE="$HOME/mind-palace"
 export WORK_STATION="$HOME/work-station"
