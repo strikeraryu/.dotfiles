@@ -19,20 +19,23 @@ return {
     config = function()
       local obsidian = require("obsidian")
       obsidian.setup({
-        follow_url_func = function(url)
-          vim.fn.jobstart({ "open", url })
-        end,
-        follow_img_func = function(img)
-          vim.fn.jobstart { "qlmanage", "-p", img }
-        end,
         workspaces = {
           {
             name = "mind-palace",
             path = "~/mind-palace",
             overrides = {
               templates = {
-                folder = "templates"
-              }
+                folder = "templates",
+                substitutions = {
+                  ["date:YYYYMMDD"] = function()
+                    return os.date("%Y%m%d")
+                  end,
+                  ["time:HHmm"] = function()
+                    return os.date("%H%M")
+                  end,
+                },
+              },
+              disable_frontmatter = true,
             }
           },
           {
@@ -40,8 +43,17 @@ return {
             path = "~/work-station/bench/hjkl/vault",
             overrides = {
               templates = {
-                folder = "templates"
-              }
+                folder = "templates",
+                substitutions = {
+                  ["date:YYYYMMDD"] = function()
+                    return os.date("%Y%m%d")
+                  end,
+                  ["time:HHmm"] = function()
+                    return os.date("%H%M")
+                  end,
+                },
+              },
+              disable_frontmatter = true,
             }
           },
           {
@@ -54,11 +66,25 @@ return {
               new_notes_location = "current_dir",
               templates = {
                 folder = vim.NIL,
+                substitutions = {
+                  date = function()
+                    return os.date("%Y%m%d")
+                  end,
+                  time = function()
+                    return os.date("%H%M")
+                  end,
+                },
               },
               disable_frontmatter = true,
             },
           },
-        }
+        },
+        follow_url_func = function(url)
+          vim.fn.jobstart({ "open", url })
+        end,
+        follow_img_func = function(img)
+          vim.fn.jobstart { "qlmanage", "-p", img }
+        end,
       })
 
       vim.opt.conceallevel = 2
