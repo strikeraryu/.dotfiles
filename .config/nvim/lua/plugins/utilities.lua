@@ -36,7 +36,12 @@ return {
       vim.keymap.set("n", "<C-S-N>", function() require("harpoon.ui").nav_next() end)
     end
   },
-  { 'ap/vim-css-color', },
+  {
+    'brenoprata10/nvim-highlight-colors',
+    config = function()
+      require('nvim-highlight-colors').setup({})
+    end
+  },
   { 'mechatroner/rainbow_csv' },
   {
     "folke/which-key.nvim",

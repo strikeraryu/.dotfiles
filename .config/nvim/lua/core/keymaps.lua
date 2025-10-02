@@ -100,6 +100,11 @@ local mappings = {
   -- Insert mode enhancements
   -- ═══════════════════════════════════════════
   { "i",          "<M-BS>",      "<C-W>",                                                                    { desc = "Delete word in insert mode" } },
+
+  -- ═══════════════════════════════════════════
+  -- Word wrap toggle
+  -- ═══════════════════════════════════════════
+  { "n",          "<leader>uw", ":ToggleWrap <CR>",                                                          { desc = "Toggle word wrap" } },
 }
 
 for _, map in ipairs(mappings) do

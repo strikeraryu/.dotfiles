@@ -26,6 +26,7 @@ window-padding-x = 0
 window-padding-y = 0
 
 # Quick Terminal
+quick-terminal-position = right
 quick-terminal-animation-duration = 0
 keybind = global:alt+s=toggle_quick_terminal
 

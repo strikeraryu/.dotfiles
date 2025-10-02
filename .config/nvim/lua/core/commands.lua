@@ -15,3 +15,14 @@ vim.api.nvim_create_user_command('RemoveFromQuickfix', function()
   table.remove(qf, idx)
   vim.fn.setqflist(qf, 'r')
 end, {})
+
+
+vim.api.nvim_create_user_command('ToggleWrap', function()
+  if vim.wo.wrap then
+    vim.wo.wrap = false
+    vim.notify("Word wrap disabled", vim.log.levels.INFO)
+  else
+    vim.wo.wrap = true
+    vim.notify("Word wrap enabled", vim.log.levels.INFO)
+  end
+end, {})

@@ -58,6 +58,7 @@ return {
       require("nvim-tree").setup({
         sync_root_with_cwd = true,
         respect_buf_cwd = true,
+        hijack_netrw = false,
         view = {
           side = "right",
           width = 30,

@@ -39,7 +39,7 @@ return {
       },
     })
 
-    ts_context.setup({ max_lines = 2 })
+    ts_context.setup({ max_lines = 4 })
 
     vim.keymap.set("n", "<leader>cc", function()
       ts_context.go_to_context(vim.v.count1)
