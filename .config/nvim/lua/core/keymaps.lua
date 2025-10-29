@@ -89,7 +89,7 @@ local mappings = {
   -- System commands
   -- ═══════════════════════════════════════════
   { "n",          "<leader>X",   "<cmd>!chmod +x %<CR>",                                                     { desc = "Make file executable" } },
-  { "n",          "<leader>R",   "<cmd>!(cd ~/.env_config/ && stow -R .)<CR>",                               { desc = "Re-stow dotfiles" } },
+  { "n",          "<leader>R",   "<cmd>!(cd ~/.dotfiles/ && stow -R .)<CR>",                               { desc = "Re-stow dotfiles" } },
 
   -- ═══════════════════════════════════════════
   -- Plugin: FileExplorer
