@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to the Zsh history file
-HISTORY_FILE="/Users/striker/.zsh_history"
+HISTORY_FILE="$HOME/.zsh_history"
 
 # Function to get the second last command from the history file
 get_last_command() {
