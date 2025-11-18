@@ -1,5 +1,28 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Day - Open or create today's daily note
+
+USAGE:
+    day
+
+DESCRIPTION:
+    Opens today's daily note in your mind palace. If the note doesn't exist,
+    it creates a new one from the daily template with tasks, log section, and
+    navigation to yesterday/tomorrow's notes.
+
+    Opens in nvim with NoNeckPain for centered editing.
+
+ENVIRONMENT:
+    MIND_PALACE    Path to your mind palace directory
+
+EXAMPLES:
+    day
+EOF
+    exit 0
+fi
+
 today=$(date +"%d-%m-%Y")
 month=$(date +"%m")
 tomorrow=$(date -v+1d +"%d-%m-%Y")

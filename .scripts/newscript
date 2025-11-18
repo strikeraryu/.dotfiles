@@ -1,5 +1,32 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Newscript - Create or open scripts
+
+USAGE:
+    newscript [name]
+
+ARGUMENTS:
+    name            Name of the script to create or open
+                    If not provided, you'll be prompted to enter one
+
+DESCRIPTION:
+    Creates a new executable bash script in your scripts directory with a
+    shebang line. If the script already exists, opens it for editing. After
+    creation, runs stow to update symlinks. Opens the script in nvim.
+
+ENVIRONMENT:
+    SCRIPTS        Path to your scripts directory
+    ENV_HOME       Path to your environment home for stow
+
+EXAMPLES:
+    newscript my-new-tool
+    newscript
+EOF
+    exit 0
+fi
+
 # creates a new script in my scripts collection
 
 # check if script name is provided

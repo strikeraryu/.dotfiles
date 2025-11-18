@@ -1,4 +1,28 @@
 #!/bin/sh
+
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    cat << 'EOF'
+Google - Search Google in w3m browser
+
+USAGE:
+    google <search terms>
+
+ARGUMENTS:
+    search terms    Query to search on Google
+
+DESCRIPTION:
+    Searches Google using w3m text-based browser. URL-encodes the search
+    query and opens results in w3m.
+
+    Credits to rwxrob
+
+EXAMPLES:
+    google bash scripting tips
+    google "exact phrase search"
+EOF
+    exit 0
+fi
+
 # credits to rwxrob
 url="https://google.com/search?q=$(urlencode "$*")"
 exec w3m "$url"

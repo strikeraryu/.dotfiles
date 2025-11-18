@@ -1,5 +1,32 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Portfolio Add Note - Import notes to portfolio
+
+USAGE:
+    portfolio-add-note
+
+DESCRIPTION:
+    Interactively select notes from your mind palace using fzf and import
+    them to your portfolio. Extracts metadata (title, date, tags) from the
+    notes, removes frontmatter, and updates meta.json with the information.
+
+    Processes multiple files selected in fzf.
+
+ENVIRONMENT:
+    MIND_PALACE    Path to your mind palace directory (default: ~/mind-palace)
+
+FILES:
+    meta.json      Created/updated in current directory with note metadata
+
+EXAMPLES:
+    cd ~/portfolio
+    portfolio-add-note
+EOF
+    exit 0
+fi
+
 MIND_PALACE=~/mind-palace
 TARGET_DIR=.
 META_FILE=meta.json

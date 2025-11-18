@@ -1,5 +1,26 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+MP Sync - Sync mind palace git repository
+
+USAGE:
+    mp-sync
+
+DESCRIPTION:
+    Syncs your mind palace with git. Pulls latest changes, adds all files,
+    commits with a timestamp, and pushes to remote. Returns to original
+    directory after completion.
+
+ENVIRONMENT:
+    MIND_PALACE    Path to your mind palace directory
+
+EXAMPLES:
+    mp-sync
+EOF
+    exit 0
+fi
+
 timestamp=$(date +"%d%m%Y%H%M")
 
 cd $MIND_PALACE

@@ -1,3 +1,26 @@
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Link Bar - Browser link management with aliases
+
+USAGE:
+    source this file and use the following functions:
+
+FUNCTIONS:
+    lbinit              Initialize link bar directory and files
+    lbadd <alias> <url> <profile>
+                        Add or update a link with an alias
+    lbls [-l]           List all aliases (use -l for detailed view with URLs)
+    lbopen <alias> [profile]
+                        Open a link by alias in ARC browser
+
+EXAMPLES:
+    lbadd gh https://github.com work
+    lbls -l
+    lbopen gh
+EOF
+    return 0
+fi
+
 function lbinit() {
  local lb_path=${LINK_BAR_PATH:-"/link_bar"}
  mkdir -p ~"$lb_path"

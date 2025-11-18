@@ -1,5 +1,24 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Move from Downloads - Move files from Downloads with fuzzy finding
+
+USAGE:
+    move-from-downloads
+
+DESCRIPTION:
+    Interactively select a file from ~/Downloads using fzf (sorted by
+    modification time), optionally rename it, and copy it to the directory
+    where the command was executed.
+
+EXAMPLES:
+    cd ~/projects/myproject
+    move-from-downloads
+EOF
+    exit 0
+fi
+
 cd ~/Downloads || exit
 
 file=$(ls -t | fzf)

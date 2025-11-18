@@ -1,6 +1,26 @@
 #!/bin/bash
 
-#!/bin/bash
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+EC2 Get - Get EC2 instance information by name
+
+USAGE:
+    ec2-get <name-pattern>
+
+ARGUMENTS:
+    name-pattern    Pattern to match against EC2 instance Name tag
+
+DESCRIPTION:
+    Searches for EC2 instances matching the given name pattern and displays
+    their Name tag and Instance ID. Uses the 'prod-dev' AWS profile.
+
+EXAMPLES:
+    ec2-get web-server
+    ec2-get prod
+EOF
+    exit 0
+fi
+
 # aws --profile prod-dev ec2 describe-instances --filters "Name=tag:Name,Values=$1" --query 'Reservations[*].Instances[*].[InstanceId]' --output text
 aws --profile prod-dev ec2 describe-instances \
     --filters "Name=tag:Name,Values=*$1*" \

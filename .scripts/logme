@@ -1,5 +1,30 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Logme - Log actions to today's daily note
+
+USAGE:
+    logme <action>
+
+ARGUMENTS:
+    action          Action or note to log (all arguments are combined)
+
+DESCRIPTION:
+    Appends a timestamped log entry to today's daily note in your mind palace.
+    Timestamps are in IST 12-hour format. Creates a "## Day Log" section if
+    it doesn't exist.
+
+ENVIRONMENT:
+    MIND_PALACE    Path to your mind palace directory
+
+EXAMPLES:
+    logme Started working on project X
+    logme Meeting with team
+EOF
+    exit 0
+fi
+
 # Function to get the current timestamp in IST 12-hour format
 get_timestamp() {
     TZ='Asia/Kolkata' date '+%I:%M %p'

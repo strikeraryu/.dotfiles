@@ -1,5 +1,23 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Watchp - Watch and re-run last command
+
+USAGE:
+    watchp
+
+DESCRIPTION:
+    Retrieves the second-to-last command from your Zsh history and runs it
+    repeatedly using 'watch' (every 1 second). Useful for monitoring the
+    output of a command that changes over time.
+
+EXAMPLES:
+    watchp
+EOF
+    exit 0
+fi
+
 # Path to the Zsh history file
 HISTORY_FILE="$HOME/.zsh_history"
 

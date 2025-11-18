@@ -10,7 +10,7 @@ return {
         -- Optionally disable cmp source if using virtual text only
         enable_cmp_source = false,
         virtual_text = {
-          enabled = true,
+          enabled = false,
           -- Set to true if you never want completions to be shown automatically.
           manual = false,
           -- A mapping of filetype to true or false, to enable virtual text.
@@ -46,6 +46,16 @@ return {
         }
       })
     end
+  },
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<Tab>",
+        },
+      })
+    end,
   },
   {
     "jackMort/ChatGPT.nvim",
@@ -194,5 +204,11 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
+  },
+  {
+    "sourcegraph/amp.nvim",
+    branch = "main",
+    lazy = false,
+    opts = { auto_start = true, log_level = "info" },
   }
 }

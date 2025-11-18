@@ -6,7 +6,7 @@ initial-command = /opt/homebrew/bin/tmux new-session -A -D -s ghostty
 quit-after-last-window-closed = true
 
 # Environment
-term = xterm-256color
+term = xterm-ghostty
 
 # Font settings
 font-family = MesloLGS NF

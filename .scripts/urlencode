@@ -1,4 +1,29 @@
 #!/usr/bin/env bash
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Urlencode - URL encode input
+
+USAGE:
+    urlencode <text>
+    echo <text> | urlencode
+
+ARGUMENTS:
+    text            Text to URL encode
+
+DESCRIPTION:
+    URL-encodes the provided text or stdin. Converts special characters to
+    percent-encoded format suitable for URLs.
+
+    Credits to rwxrob and Stack Exchange
+
+EXAMPLES:
+    urlencode "hello world"
+    echo "foo bar/baz" | urlencode
+EOF
+    exit 0
+fi
+
 # stolen shamelessly from rwxrob
 # yeah, i totally stole this from stack exchange, no shame
 

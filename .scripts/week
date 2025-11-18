@@ -1,0 +1,92 @@
+#!/bin/bash
+set -euo pipefail
+
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  cat << 'EOF'
+week - Open or create this week's weekly note
+
+USAGE:
+    week
+
+DESCRIPTION:
+    Opens or creates this week's note in:
+      $MIND_PALACE/1-periodic-notes/weekly-notes/<year>/<week>.md
+
+    Template:
+      [[prev_week]] [[next_week]]
+      [[day1]] [[day2]] ... [[day7]]
+      + sections for goals, highlights, retro, notes.
+EOF
+  exit 0
+fi
+
+if [[ -z "${MIND_PALACE:-}" ]]; then
+  echo "Error: MIND_PALACE is not set." >&2
+  exit 1
+fi
+
+weekly_file="$(
+python3 - <<'PY' 2>/dev/null || true
+import os
+from datetime import datetime, timedelta
+
+mp = os.environ["MIND_PALACE"]
+
+now = datetime.now()
+monday = now - timedelta(days=now.isoweekday() - 1)
+
+def iso(d):
+    y, w, _ = d.isocalendar()
+    return str(y), f"{w:02d}"
+
+year, week = iso(monday)
+prev_y, prev_w = iso(monday - timedelta(weeks=1))
+next_y, next_w = iso(monday + timedelta(weeks=1))
+
+weekly_dir = os.path.join(mp, "1-periodic-notes", "weekly-notes", year)
+os.makedirs(weekly_dir, exist_ok=True)
+path = os.path.join(weekly_dir, f"{week}.md")
+
+if not os.path.exists(path):
+    days = []
+    for i in range(7):
+        d = monday + timedelta(days=i)
+        days.append(f"[[{d.strftime('%d-%m-%Y')}]]")
+    days_line = " ".join(days)
+
+    content = f"""# Week {week}, {year}
+
+[[{prev_w}-{prev_y}]] [[{next_w}-{next_y}]]
+
+{days_line}
+
+## Goals
+- 
+
+## Highlights
+- 
+
+## Tasks
+- [ ] 
+
+## Retro
+- What went well:
+- What could be improved:
+- What will I try next week:
+
+## Notes
+- 
+"""
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+print(path)
+PY
+)"
+
+if [[ -z "$weekly_file" ]]; then
+  echo "Error: failed to compute weekly file path."
+  exit 1
+fi
+
+nvim '+ normal Gzz' "$weekly_file" -c :NoNeckPain

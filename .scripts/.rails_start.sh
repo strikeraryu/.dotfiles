@@ -1,5 +1,25 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Rails Start - Launch a tmux session for Rails development
+
+USAGE:
+    .rails_start.sh
+
+DESCRIPTION:
+    Creates a tmux session named 'my_session' with 4 panes:
+    - Pane 1: Rails server (rails s)
+    - Pane 2: Rails console (rails c)
+    - Pane 3: Yarn dev server (yarn run dev)
+    - Pane 4: Empty shell
+
+EXAMPLES:
+    .rails_start.sh
+EOF
+    exit 0
+fi
+
 # Create a new tmux session named 'my_session'
 tmux new-session -d -s my_session
 

@@ -1,5 +1,35 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Session - tmux session manager
+
+USAGE:
+    session [directory]
+
+ARGUMENTS:
+    directory       Directory to create session for
+                    If not provided, uses fzf to select from predefined paths
+
+DESCRIPTION:
+    Simple tmux session manager. Lists existing tmux sessions and directories
+    from predefined paths (mind-palace, work-station). Creates new sessions
+    or switches to existing ones.
+
+    Search paths:
+    - ~/mind-palace
+    - ~/work-station/bench/work
+    - ~/work-station/bench/personal
+    - ~/work-station/dump/
+    - ~/work-station/dump/personal
+
+EXAMPLES:
+    session
+    session ~/my-project
+EOF
+    exit 0
+fi
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else

@@ -1,5 +1,31 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Mailme - Create notes in inbox
+
+USAGE:
+    mailme [filename]
+
+ARGUMENTS:
+    filename        Name of the note to create (without .md extension)
+                    If not provided, you'll be prompted to enter one
+
+DESCRIPTION:
+    Creates a new note in your mind palace inbox (0-inbox/). Opens the note
+    in nvim with the inb-core Obsidian template if it's a new file, or just
+    opens it if it already exists. Uses NoNeckPain for centered editing.
+
+ENVIRONMENT:
+    MIND_PALACE    Path to your mind palace directory
+
+EXAMPLES:
+    mailme meeting-notes
+    mailme
+EOF
+    exit 0
+fi
+
 # A bash script that helps me create notes in my second brain
 # based on my "blog" script
 # TODO

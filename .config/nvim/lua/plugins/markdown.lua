@@ -38,24 +38,24 @@ return {
               disable_frontmatter = true,
             }
           },
-          {
-            name = "hjkl-vault",
-            path = "~/work-station/bench/hjkl/vault",
-            overrides = {
-              templates = {
-                folder = "templates",
-                substitutions = {
-                  ["date:YYYYMMDD"] = function()
-                    return os.date("%Y%m%d")
-                  end,
-                  ["time:HHmm"] = function()
-                    return os.date("%H%M")
-                  end,
-                },
-              },
-              disable_frontmatter = true,
-            }
-          },
+          -- {
+          --   name = "hjkl-vault",
+          --   path = "~/work-station/bench/hjkl/vault",
+          --   overrides = {
+          --     templates = {
+          --       folder = "templates",
+          --       substitutions = {
+          --         ["date:YYYYMMDD"] = function()
+          --           return os.date("%Y%m%d")
+          --         end,
+          --         ["time:HHmm"] = function()
+          --           return os.date("%H%M")
+          --         end,
+          --       },
+          --     },
+          --     disable_frontmatter = true,
+          --   }
+          -- },
           {
             name = "no-vault",
             path = function()

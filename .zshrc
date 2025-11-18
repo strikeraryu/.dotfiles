@@ -127,3 +127,6 @@ alias cpreview='curl -H "X-Clipboard-Password: $CLIPBOARD_SERVER_PASSWORD" "$CLI
 for file in $HOME/.zshrc.*; do
   source $file
 done
+
+# amp
+export PATH="$HOME/.local/bin:$PATH"

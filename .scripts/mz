@@ -1,3 +1,27 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+MZ - Move files to zettelkasten directory
+
+USAGE:
+    mz <file>
+
+ARGUMENTS:
+    file            File to move to zettelkasten
+
+DESCRIPTION:
+    Moves the specified file to your mind palace zettelkasten directory
+    (00-zettelkasten/).
+
+ENVIRONMENT:
+    MIND_PALACE    Path to your mind palace directory
+
+EXAMPLES:
+    mz note.md
+    mz important-reference.pdf
+EOF
+    exit 0
+fi
+
 mv "$1" "$MIND_PALACE/00-zettelkasten/"

@@ -1,3 +1,20 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Path - Display PATH variable
+
+USAGE:
+    path
+
+DESCRIPTION:
+    Displays the PATH environment variable with each directory on a separate
+    line for easier reading.
+
+EXAMPLES:
+    path
+EOF
+    exit 0
+fi
+
 echo -e ${PATH//:/\\n}

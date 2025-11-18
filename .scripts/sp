@@ -1,3 +1,20 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+SP - Open scratchpad in nvim
+
+USAGE:
+    sp
+
+DESCRIPTION:
+    Opens scratchpad.md in nvim with NoNeckPain for centered editing.
+    Creates the file if it doesn't exist.
+
+EXAMPLES:
+    sp
+EOF
+    exit 0
+fi
+
 nvim scratchpad.md -c ":NoNeckPain"

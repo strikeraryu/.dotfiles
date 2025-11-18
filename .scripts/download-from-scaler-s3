@@ -1,5 +1,32 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Download from Scaler S3 - Batch download files from S3
+
+USAGE:
+    download-from-scaler-s3 [-t] [filename]
+
+OPTIONS:
+    -t              Use timestamps for downloaded filenames
+    -h, --help      Show this help message
+
+ARGUMENTS:
+    filename        File containing S3 paths (default: s3-links)
+
+DESCRIPTION:
+    Downloads multiple files from S3 based on paths listed in the input file.
+    Shows a progress bar during download. Skips files that already exist.
+    Uses the 'prod-dev' AWS profile.
+
+EXAMPLES:
+    download-from-scaler-s3
+    download-from-scaler-s3 -t my-s3-paths
+    download-from-scaler-s3 custom-links
+EOF
+    exit 0
+fi
+
 # Default filename
 default_filename="s3-links"
 filename=${1:-$default_filename}
@@ -7,10 +34,36 @@ filename=${1:-$default_filename}
 # Check for '-t' and '-p' flags
 use_timestamp=false
 
-while getopts "t" opt; do
+while getopts "th" opt; do
   case $opt in
     t)
       use_timestamp=true
+      ;;
+    h)
+      cat << 'EOF'
+Download from Scaler S3 - Batch download files from S3
+
+USAGE:
+    download-from-scaler-s3 [-t] [filename]
+
+OPTIONS:
+    -t              Use timestamps for downloaded filenames
+    -h, --help      Show this help message
+
+ARGUMENTS:
+    filename        File containing S3 paths (default: s3-links)
+
+DESCRIPTION:
+    Downloads multiple files from S3 based on paths listed in the input file.
+    Shows a progress bar during download. Skips files that already exist.
+    Uses the 'prod-dev' AWS profile.
+
+EXAMPLES:
+    download-from-scaler-s3
+    download-from-scaler-s3 -t my-s3-paths
+    download-from-scaler-s3 custom-links
+EOF
+      exit 0
       ;;
     *)
       ;;

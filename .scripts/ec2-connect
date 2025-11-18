@@ -1,4 +1,26 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+EC2 Connect - Connect to EC2 instance via SSM
+
+USAGE:
+    ec2-connect <instance-id> [profile]
+
+ARGUMENTS:
+    instance-id     EC2 instance ID to connect to
+    profile         AWS profile to use (default: prod-dev)
+
+DESCRIPTION:
+    Connects to an EC2 instance using AWS Systems Manager Session Manager.
+    Requires AWS CLI and SSM plugin to be installed.
+
+EXAMPLES:
+    ec2-connect i-1234567890abcdef0
+    ec2-connect i-1234567890abcdef0 production
+EOF
+    exit 0
+fi
+
 AWS_PROFILE=${2:-prod-dev}
 aws --profile $AWS_PROFILE ssm start-session --target $1

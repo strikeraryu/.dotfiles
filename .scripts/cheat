@@ -1,5 +1,23 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Cheat - Fetch cheatsheets from cheat.sh
+
+USAGE:
+    cheat <topic>
+
+DESCRIPTION:
+    Fetches and displays cheatsheets from cheat.sh for the specified topic.
+
+EXAMPLES:
+    cheat tar
+    cheat git
+    cheat python/list
+EOF
+    exit 0
+fi
+
 #shortcut for cheatsheet
 input="$1"
 curl "cheat.sh/$input"

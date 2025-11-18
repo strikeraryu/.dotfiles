@@ -1,4 +1,25 @@
 #!/bin/bash
 
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    cat << 'EOF'
+Easysend - Copy files to easy-send directory
+
+USAGE:
+    easysend [file]
+
+ARGUMENTS:
+    file            File to copy (if not provided, uses fzf to select)
+
+DESCRIPTION:
+    Copies the specified file to ~/easy-send/ directory. If no file is
+    provided, uses fzf for interactive file selection from current directory.
+
+EXAMPLES:
+    easysend myfile.txt
+    easysend
+EOF
+    exit 0
+fi
+
 file=${1:-$(ls | fzf)}
 [ -n "$file" ] && cp -f "$file" ~/easy-send/
