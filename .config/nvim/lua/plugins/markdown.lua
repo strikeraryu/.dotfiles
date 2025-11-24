@@ -19,6 +19,16 @@ return {
     config = function()
       local obsidian = require("obsidian")
       obsidian.setup({
+        attachments = {
+          img_folder = "attachments",
+          img_name_func = function()
+            return string.format("%s-", os.time())
+          end,
+          img_text_func = function(client, path)
+            path = client:vault_relative_path(path) or path
+            return string.format("![%s](%s)", path.name, path)
+          end,
+        },
         workspaces = {
           {
             name = "mind-palace",
@@ -98,6 +108,7 @@ return {
       end, { noremap = false, expr = true, desc = 'Follow link or go to file' })
 
       vim.keymap.set('n', '<leader>ot', '<CMD>ObsidianTemplate<CR>', { desc = '[O]bsidian [T]emplates' })
+      vim.keymap.set('n', '<leader>op', '<CMD>ObsidianPasteImg<CR>', { desc = '[O]bsidian [P]aste image' })
     end
   }
 }

@@ -130,3 +130,6 @@ done
 
 # amp
 export PATH="$HOME/.local/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/aryamaan/.antigravity/antigravity/bin:$PATH"
