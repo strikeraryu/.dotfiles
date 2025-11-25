@@ -45,7 +45,7 @@ next_y, next_w = iso(monday + timedelta(weeks=1))
 
 weekly_dir = os.path.join(mp, "1-periodic-notes", "weekly-notes", year)
 os.makedirs(weekly_dir, exist_ok=True)
-path = os.path.join(weekly_dir, f"{week}.md")
+path = os.path.join(weekly_dir, f"{week}-{year}.md")
 
 if not os.path.exists(path):
     days = []
