@@ -10,7 +10,7 @@ term = xterm-ghostty
 
 # Font settings
 font-family = MesloLGS NF
-font-size = 13
+font-size = 10
 
 # Window behavior
 window-decoration = none
